@@ -15,3 +15,6 @@ gem 'activesupport'
 gem "sinatra-activerecord"
 gem "pg"
 gem "rake"
+
+#Stuff for Kafka
+gem "ruby-kafka"
