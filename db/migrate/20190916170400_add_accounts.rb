@@ -1,4 +1,4 @@
-class AddAccount < ActiveRecord::Migration[6.0]
+class AddAccounts < ActiveRecord::Migration[6.0]
   def up
     
     create_table :account do |t|
@@ -26,4 +26,5 @@ class AddAccount < ActiveRecord::Migration[6.0]
   def down
     drop_table :account
   end
+  
 end
