@@ -23,9 +23,7 @@ class App < Sinatra::Base
   KAFKA_TOPIC = ENV.fetch('KAFKA_TOPIC', 'messages')
   GROUP_ID = ENV.fetch('KAFKA_CONSUMER_GROUP', 'heroku-kafka-demo')
 
-  def with_prefix(name)
-    "#{ENV['KAFKA_PREFIX']}#{name}"
-  end
+
 
   def initialize_kafka
     tmp_ca_file = Tempfile.new('ca_certs')
