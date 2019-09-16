@@ -33,3 +33,4 @@
   
   def read_from_kafka
     
+  end
