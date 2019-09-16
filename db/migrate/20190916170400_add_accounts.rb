@@ -20,7 +20,7 @@ class AddAccounts < ActiveRecord::Migration[6.0]
       t.datetime :updated_at
     end
       add_index :account, :sfid
-      add_index :account, :eternal_id__c
+      add_index :account, :external_id__c
   end
   
   def down
