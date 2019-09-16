@@ -30,7 +30,7 @@
     message = account.to_json
     
     #Send the message off to Kafka
-    $producer.produce(message, topic: with_prefix(KAFKA_TOPIC))
+    $producer.produce(message, topic: with_prefix(ENV.fetch('KAFKA_TOPIC')))
     
   end
   
