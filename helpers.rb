@@ -2,6 +2,9 @@
   
   end
   
+  def with_prefix(name)
+    "#{ENV['KAFKA_PREFIX']}#{name}"
+  end
   
   def generate_account()
     new_acct = Account.new
