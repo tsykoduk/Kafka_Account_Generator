@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  self.table_name = "salesforce.account"
+  # self.table_name = "salesforce.account"
   before_validation :assign_uuid
    
    
