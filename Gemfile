@@ -18,3 +18,6 @@ gem "rake"
 
 #Stuff for Kafka
 gem "ruby-kafka"
+
+#Stuff for Faker
+gem "faker"

@@ -4,6 +4,7 @@ require "sinatra/activerecord"
 require 'uri'
 require 'kafka'
 require "json"
+require 'faker'
 Bundler.require
 
 
@@ -64,8 +65,6 @@ class App < Sinatra::Base
     end
   end
   
-  
-  #Let's make sure that the user is signed in as a Herokai or SFDC person
   before do
      
   end

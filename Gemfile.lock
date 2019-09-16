@@ -27,6 +27,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.7)
     excon (0.66.0)
+    faker (2.3.0)
+      i18n (~> 1.6.0)
     heroics (0.0.25)
       erubis (~> 2.0)
       excon
@@ -90,6 +92,7 @@ DEPENDENCIES
   actionview
   activesupport
   eventmachine
+  faker
   pg
   platform-api
   puma
