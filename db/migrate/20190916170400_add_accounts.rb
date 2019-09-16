@@ -19,6 +19,8 @@ class AddAccount < ActiveRecord::Migration[6.0]
       t.datetime "created_at"
       t.datetime "updated_at"
     end
+    
       add_index "account", ["sfid"], name: "account_idx_sfid", unique: true, using: :btree
+  
   end
 end
