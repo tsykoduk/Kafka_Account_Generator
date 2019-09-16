@@ -12,10 +12,12 @@ class AddAccounts < ActiveRecord::Migration[6.0]
       t.string   :tickersymbol,      limit: 20
       t.string   :billingcity,       limit: 40
       t.boolean  :isdeleted
-      t.string   :phone,             limit: 40
+      t.string   :phone,             limit: 40      
+      t.string   :fax,               limit: 40
       t.string   :billingstate,      limit: 80
       t.string   :billingcountry,    limit: 80
       t.string   :external_id__c,    limit: 80
+      t.string   :description
       t.datetime :created_at
       t.datetime :updated_at
     end
