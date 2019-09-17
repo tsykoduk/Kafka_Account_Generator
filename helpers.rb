@@ -6,7 +6,7 @@
     "#{ENV['KAFKA_PREFIX']}#{name}"
   end
   
-  def generate_account()
+  def gen_account()
     new_acct = Account.new
     new_acct.name = Faker::Company.name
     new_acct.billingcountry = Faker::Address.country
@@ -24,14 +24,20 @@
     return new_acct
   end
     
-  def write_account_to_kafka(account)
-    
-    #We need to seralize the account into JSON
-    message = account.to_json
-    
-    #Send the message off to Kafka
-    $producer.produce(message, topic: with_prefix(ENV.fetch('KAFKA_TOPIC')))
-    
+  def push_kafka(message)
+     msg = message.to_json
+      if $producer.produce(msg, topic: with_prefix(ENV.fetch('KAFKA_TOPIC')))
+    	  $producer.deliver_messages
+      	sleep(1.second)
+    	  push_kafka(acct)
+        puts "Flushed Queue"
+        puts "Pushed message " + message.external_id__c + " to " + with_prefix(ENV.fetch('KAFKA_TOPIC'))
+      end
+    end
+  end
+  
+  def just_deliver(message)
+    producer_kafka.deliver_message(message, topic: with_prefix(ENV.fetch('KAFKA_TOPIC')))
   end
   
   def read_from_kafka

@@ -8,7 +8,7 @@ require 'faker'
 Bundler.require
 
 
-   set :database, ENV['DATABASE_URL'] || 'postgres://localhost/quoter'
+set :database, ENV['DATABASE_URL'] || 'postgres://localhost/quoter'
    
 class App < Sinatra::Base
   include ActionView::Helpers::NumberHelper
@@ -20,7 +20,7 @@ class App < Sinatra::Base
   Dir["./models/*.rb"].each {|file| require file }
   
   #Setup Kafka
-  KAFKA_TOPIC = ENV.fetch('KAFKA_TOPIC')
+  KAFKA_TOPIC = with_prefix(ENV.fetch('KAFKA_TOPIC'))
 #  GROUP_ID = ENV.fetch('KAFKA_CONSUMER_GROUP')
   
   #Setup Kafka
@@ -30,13 +30,20 @@ class App < Sinatra::Base
   # This demo app connects to kafka on multiple threads.
   # Right now ruby-kafka isn't thread safe, so we establish a new client
   # for the consumer and a different one for the consumer.
-  producer_kafka = Kafka.new(
+  $producer_kafka = Kafka.new(
     seed_brokers: ENV.fetch('KAFKA_URL'),
     ssl_ca_cert_file_path: tmp_ca_file.path,
     ssl_client_cert: ENV.fetch('KAFKA_CLIENT_CERT'),
-    ssl_client_cert_key: ENV.fetch('KAFKA_CLIENT_CERT_KEY')
+    ssl_client_cert_key: ENV.fetch('KAFKA_CLIENT_CERT_KEY'),
+    ssl_verify_hostname: false
   )
-  $producer = producer_kafka.async_producer(delivery_interval: 1)
+
+  $producer = $producer_kafka.async_producer(
+  # Trigger a delivery once 100 messages have been buffered.
+  #delivery_threshold: 100
+  # Trigger a delivery every 10 seconds.
+  delivery_interval: 0
+  )
   
   consumer_kafka = Kafka.new(
     seed_brokers: ENV.fetch('KAFKA_URL'),
