@@ -20,7 +20,8 @@
     new_acct.billingpostalcode = Faker::Address.postcode
     new_acct.phone = Faker::PhoneNumber.phone_number
     new_acct.fax = Faker::PhoneNumber.phone_number
-    new_acct.external_id__c = SecureRandom.uuid + Time.now().to_i.to_s
+    new_acct.assign_uuuid
+    new_acct.save
     return new_acct
   end
     
@@ -34,7 +35,7 @@
         puts "Pushed message " + message.external_id__c + " to " + with_prefix(ENV.fetch('KAFKA_TOPIC'))
       end
     end
-  end
+
   
   def just_deliver(message)
     producer_kafka.deliver_message(message, topic: with_prefix(ENV.fetch('KAFKA_TOPIC')))
