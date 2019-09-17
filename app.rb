@@ -15,6 +15,10 @@ class App < Sinatra::Base
   include ActionView::Helpers::DateHelper
   include Sinatra::ActiveRecordExtension
 
+  helpers do
+    #pull in the helpers stuff 
+    require_relative 'helpers'
+  end
 
   #set up Postgres
   Dir["./models/*.rb"].each {|file| require file }
@@ -77,16 +81,9 @@ class App < Sinatra::Base
   end
 
 
-
-  helpers do
-    #pull in the helpers stuff 
-    require_relative 'helpers'
-  end
-
   get "/" do
   
   end
-
   
   
 end
