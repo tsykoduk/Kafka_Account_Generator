@@ -15,13 +15,14 @@ class App < Sinatra::Base
   include ActionView::Helpers::DateHelper
   include Sinatra::ActiveRecordExtension
 
+  #set up Models
+  Dir["./models/*.rb"].each {|file| require file }
+  
+
   helpers do
     #pull in the helpers stuff 
     require_relative 'helpers'
   end
-
-  #set up Postgres
-  Dir["./models/*.rb"].each {|file| require file }
   
   #Setup Kafka
   KAFKA_TOPIC = with_prefix(ENV.fetch('KAFKA_TOPIC'))
