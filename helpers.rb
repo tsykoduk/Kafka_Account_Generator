@@ -20,7 +20,8 @@
     new_acct.billingpostalcode = Faker::Address.postcode
     new_acct.phone = Faker::PhoneNumber.phone_number
     new_acct.fax = Faker::PhoneNumber.phone_number
-    new_acct.assign_uuuid
+    #We don't need to do this, becasue when we save the account, it assignes a UUID if one is not present
+    #new_acct.assign_uuuid
     new_acct.save
     return new_acct
   end
